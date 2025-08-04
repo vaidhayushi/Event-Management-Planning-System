@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" db_object_id="bb49c19fc3032210319033fc05013105" extends="task" label="Event" max_length="40" name="x_1790227_event_ma_event" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Email" max_length="40" name="u_email" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="new" label="Status" max_length="40" name="u_status" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Planned" sequence="1" value="planned"/>
+                <element inactive_on_update="false" label="New" sequence="0" value="new"/>
+                <element inactive_on_update="false" label="Completed" sequence="3" value="completed"/>
+                <element inactive_on_update="false" label="Scheduled" sequence="2" value="scheduled"/>
+                <element inactive_on_update="false" label="Cancelled" sequence="4" value="cancelled"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Contact Person" max_length="100" name="u_contact_person" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Event Name" max_length="100" name="u_event_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Event Date" max_length="40" name="u_event_date" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Location" max_length="40" name="u_location" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Contact Number" max_length="40" name="u_contact_number" type="phone_number_e164"/>
+        <element label="Mark As Finished" max_length="40" name="u_mark_as_finished" type="boolean"/>
+        <element label="VIP" max_length="40" name="u_vip" type="boolean"/>
+    </element>
+</database>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" db_object_id="05afc597c3432210319033fc0501313c" extends="task" label="Event Task" max_length="40" name="x_1790227_event_ma_event_task" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Task Name" max_length="40" name="u_task_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Due Date" max_length="40" name="u_due_date" type="glide_date_time"/>
+        <element label="Mark As Completed" max_length="40" name="u_mark_as_completed" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Status" max_length="40" name="u_status" type="string">
+            <choice>
+                <element inactive_on_update="false" label="In Progress" sequence="2" value="in progress"/>
+                <element inactive_on_update="false" label="Not Started" sequence="1" value="not started"/>
+                <element inactive_on_update="false" label="Completed" sequence="3" value="completed"/>
+                <element inactive_on_update="false" label="New" sequence="0" value="new"/>
+                <element inactive_on_update="false" label="Cancelled" sequence="4" value="cancelled"/>
+            </choice>
+        </element>
+        <element attributes="encode_utf8=false" label="Event ID" max_length="32" name="u_event_id" reference="x_1790227_event_ma_event" type="reference"/>
+    </element>
+</database>

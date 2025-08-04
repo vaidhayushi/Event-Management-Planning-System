@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sysevent_email_action">
+    <sysevent_email_action action="DELETE">
+        <action_insert>true</action_insert>
+        <action_update>true</action_update>
+        <active>true</active>
+        <advanced_condition/>
+        <affected_field_on_event/>
+        <category display_value="Uncategorized" name="Uncategorized">c97d83137f4432005f58108c3ffa917a</category>
+        <collection>x_1790227_event_ma_event</collection>
+        <condition table="x_1790227_event_ma_event">u_status=scheduled^EQ<item display_value="Scheduled" endquery="false" field="u_status" goto="false" newquery="false" operator="=" or="false" value="scheduled"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <content_type>text/html</content_type>
+        <default_interval/>
+        <description/>
+        <digest_from/>
+        <digest_html/>
+        <digest_reply_to/>
+        <digest_separator_html><![CDATA[<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>]]></digest_separator_html>
+        <digest_separator_text><![CDATA[\n--------------------------------------------------------------------------------\n]]></digest_separator_text>
+        <digest_subject/>
+        <digest_template/>
+        <digest_text/>
+        <digestable>false</digestable>
+        <enable_dynamic_translation>false</enable_dynamic_translation>
+        <event_name>x_1790227_event_ma.notify.assigned.plann</event_name>
+        <event_parm_1>false</event_parm_1>
+        <event_parm_2>false</event_parm_2>
+        <exclude_delegates>false</exclude_delegates>
+        <force_delivery>false</force_delivery>
+        <from/>
+        <generation_type>event</generation_type>
+        <importance/>
+        <include_attachments>false</include_attachments>
+        <item>event.parm1</item>
+        <item_table/>
+        <mandatory>false</mandatory>
+        <message/>
+        <message_html><![CDATA[<p>Hello&nbsp; ${assigned_to.first_name},</p>
+<p>New Event is Scheduled.</p>]]></message_html>
+        <message_list/>
+        <message_text/>
+        <name>send.notification.to.the.assigned.planne</name>
+        <omit_watermark>false</omit_watermark>
+        <order>100</order>
+        <push_message_only>false</push_message_only>
+        <recipient_fields/>
+        <recipient_groups name="Event Planners">b4e7851fc3032210319033fc0501313e</recipient_groups>
+        <recipient_users>6816f79cc0a8016401c5a33be04be441</recipient_users>
+        <reply_to/>
+        <send_self>true</send_self>
+        <sms_alternate/>
+        <style/>
+        <subject/>
+        <subscribable>false</subscribable>
+        <sys_class_name>sysevent_email_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-04 10:55:59</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a353fdd3c3072210319033fc05013100</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>send.notification.to.the.assigned.planne</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sysevent_email_action_a353fdd3c3072210319033fc05013100</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-04 11:20:52</sys_updated_on>
+        <sys_version>2</sys_version>
+        <template display_value="Unsubscribe and Preferences">7ed0481f3b0b2200c869c2c703efc487</template>
+        <type>email</type>
+        <weight>0</weight>
+    </sysevent_email_action>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</application>
+        <file_path/>
+        <instance_id>50b69780ffbf8ad4c80bf8e4fc4fd9ac</instance_id>
+        <instance_name>dev282963</instance_name>
+        <name>sysevent_email_action_a353fdd3c3072210319033fc05013100</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sysevent_email_action"&gt;&lt;sysevent_email_action action="INSERT_OR_UPDATE"&gt;&lt;action_insert&gt;true&lt;/action_insert&gt;&lt;action_update&gt;true&lt;/action_update&gt;&lt;active&gt;true&lt;/active&gt;&lt;advanced_condition/&gt;&lt;affected_field_on_event/&gt;&lt;category display_value="Uncategorized" name="Uncategorized"&gt;c97d83137f4432005f58108c3ffa917a&lt;/category&gt;&lt;collection&gt;x_1790227_event_ma_event&lt;/collection&gt;&lt;condition table="x_1790227_event_ma_event"&gt;u_status=scheduled^EQ&lt;item display_value="Scheduled" endquery="false" field="u_status" goto="false" newquery="false" operator="=" or="false" value="scheduled"/&gt;&lt;item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/&gt;&lt;/condition&gt;&lt;content_type&gt;text/html&lt;/content_type&gt;&lt;default_interval/&gt;&lt;description/&gt;&lt;digest_from/&gt;&lt;digest_html/&gt;&lt;digest_reply_to/&gt;&lt;digest_separator_html&gt;&lt;![CDATA[&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;]]&gt;&lt;/digest_separator_html&gt;&lt;digest_separator_text&gt;&lt;![CDATA[\n--------------------------------------------------------------------------------\n]]&gt;&lt;/digest_separator_text&gt;&lt;digest_subject/&gt;&lt;digest_template/&gt;&lt;digest_text/&gt;&lt;digestable&gt;false&lt;/digestable&gt;&lt;enable_dynamic_translation&gt;false&lt;/enable_dynamic_translation&gt;&lt;event_name&gt;x_1790227_event_ma.notify.assigned.plann&lt;/event_name&gt;&lt;event_parm_1&gt;false&lt;/event_parm_1&gt;&lt;event_parm_2&gt;false&lt;/event_parm_2&gt;&lt;exclude_delegates&gt;false&lt;/exclude_delegates&gt;&lt;force_delivery&gt;false&lt;/force_delivery&gt;&lt;from/&gt;&lt;generation_type&gt;event&lt;/generation_type&gt;&lt;importance/&gt;&lt;include_attachments&gt;false&lt;/include_attachments&gt;&lt;item&gt;event.parm1&lt;/item&gt;&lt;item_table/&gt;&lt;mandatory&gt;false&lt;/mandatory&gt;&lt;message/&gt;&lt;message_html&gt;&lt;![CDATA[&lt;p&gt;Hello&amp;nbsp; ${assigned_to.first_name},&lt;/p&gt;
+&lt;p&gt;New Event is Scheduled.&lt;/p&gt;]]&gt;&lt;/message_html&gt;&lt;message_list/&gt;&lt;message_text/&gt;&lt;name&gt;send.notification.to.the.assigned.planne&lt;/name&gt;&lt;omit_watermark&gt;false&lt;/omit_watermark&gt;&lt;order&gt;100&lt;/order&gt;&lt;push_message_only&gt;false&lt;/push_message_only&gt;&lt;recipient_fields/&gt;&lt;recipient_groups name="Event Planners"&gt;b4e7851fc3032210319033fc0501313e&lt;/recipient_groups&gt;&lt;recipient_users&gt;6816f79cc0a8016401c5a33be04be441&lt;/recipient_users&gt;&lt;reply_to/&gt;&lt;send_self&gt;true&lt;/send_self&gt;&lt;sms_alternate/&gt;&lt;style/&gt;&lt;subject/&gt;&lt;subscribable&gt;false&lt;/subscribable&gt;&lt;sys_class_name&gt;sysevent_email_action&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2025-08-04 10:55:59&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;a353fdd3c3072210319033fc05013100&lt;/sys_id&gt;&lt;sys_mod_count&gt;4&lt;/sys_mod_count&gt;&lt;sys_name&gt;send.notification.to.the.assigned.planne&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Event Management &amp;amp;amp; Planning System" source="x_1790227_event_ma"&gt;13348913c3032210319033fc050131c4&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Event Management &amp;amp;amp; Planning System"&gt;13348913c3032210319033fc050131c4&lt;/sys_scope&gt;&lt;sys_update_name&gt;sysevent_email_action_a353fdd3c3072210319033fc05013100&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2025-08-04 11:20:52&lt;/sys_updated_on&gt;&lt;sys_version&gt;2&lt;/sys_version&gt;&lt;template display_value="Unsubscribe and Preferences"&gt;7ed0481f3b0b2200c869c2c703efc487&lt;/template&gt;&lt;type&gt;email&lt;/type&gt;&lt;weight&gt;0&lt;/weight&gt;&lt;/sysevent_email_action&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-633138752</payload_hash>
+        <record_name>send.notification.to.the.assigned.planne</record_name>
+        <reverted_from/>
+        <source>2f97011fc3032210319033fc050131f0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-04 11:20:52</sys_created_on>
+        <sys_id>db1cf19fc3072210319033fc05013199</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19874d01c1d0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-04 11:20:52</sys_updated_on>
+        <type>Notification</type>
+        <update_guid>531cf19f67072210b5dc8ad3d52eef99</update_guid>
+        <update_guid_history>531cf19f67072210b5dc8ad3d52eef99:-633138752,c9a9799b55072210e92a97e8a9520e72:-1863909601,3ec7b91bbe072210df9b06b0ed99a85c:68002645,3e97bd1b30072210a1106801652abd50:-1882891100,3266f5d7800722106f5ee59d3821d687:-1961262157</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-04 11:29:23</sys_created_on>
+        <sys_db_object display_value="" name="sysevent_email_action">sysevent_email_action</sys_db_object>
+        <sys_id>bb3fd8e2ef3e48ffa039cac4944a1a99</sys_id>
+        <sys_metadata>a353fdd3c3072210319033fc05013100</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>send.notification.to.the.assigned.planne</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_parent display_value="Event">bb49c19fc3032210319033fc05013105</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_scope_delete display_value="">2e1c8e5cab8a494c8f91868b114f6e64</sys_scope_delete>
+        <sys_update_name>sysevent_email_action_a353fdd3c3072210319033fc05013100</sys_update_name>
+        <sys_update_version display_value="sysevent_email_action_a353fdd3c3072210319033fc05013100">db1cf19fc3072210319033fc05013199</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-04 11:29:23</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
