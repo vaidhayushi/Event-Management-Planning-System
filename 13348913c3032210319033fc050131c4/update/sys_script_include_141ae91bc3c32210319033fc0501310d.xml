@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
     <sys_script_include action="INSERT_OR_UPDATE">
-        <access>package_private</access>
+        <access>public</access>
         <active>true</active>
         <api_name>x_1790227_event_ma.EventUtilsClient</api_name>
         <caller_access/>
@@ -16,16 +16,23 @@ EventUtilsClient.prototype = Object.extendsObject(global.AbstractAjaxProcessor, 
         var eventGR = new GlideRecord('x_1790227_event_ma_event');
         if (eventGR.get(eventId)) {
             var eventDetails = {
-                event_name: eventGR.getValue('u_event_name'),
-                location: eventGR.getValue('u_location'),
-                status: eventGR.getValue('u_status')
+				
+                name: gr.getValue('u_event_name'),
+                date: gr.getDisplayValue('u_event_date'),
+                location: gr.getValue('u_location'),
+                status: gr.getValue('u_status'),
+                contact: gr.getValue('u_contact_person'),
+                email: gr.getValue('u_email')
+
             };
             return JSON.stringify(eventDetails);
         } else {
-            return JSON.stringify({error: 'Event not found'});
+            return JSON.stringify({
+                error: 'Event not found'
+            });
         }
     },
-	isVIPEvent: function() {
+    isVIPEvent: function() {
         var eventId = this.getParameter('sysparm_eventId');
 
         var eventGR = new GlideRecord('x_1790227_event_ma_event');
@@ -35,20 +42,128 @@ EventUtilsClient.prototype = Object.extendsObject(global.AbstractAjaxProcessor, 
         return false;
     },
 
+    rescheduleEvent: function() {
+        var eventId = this.getParameter('sysparm_eventId');
+        var newDateInput = this.getParameter('sysparm_newDate');
+
+        if (newDateInput.length == 10) { 
+            newDateInput += " 09:00:00"; 
+        }
+
+        var gr = new GlideRecord('x_1790227_event_ma_event');
+        if (gr.get(eventId)) {
+            gr.u_event_date = newDateInput;
+            gr.update();
+
+            // Notify Planner
+            gs.eventQueue('x_1790227_event_ma.event.reschedule.notify', gr, gr.assigned_to, gr.sys_id);
+
+            return 'success';
+        }
+        return 'failure';
+    },
+
+
+
+    fetchEventTasks: function() {
+        var eventId = this.getParameter('sysparm_event_id');
+        var gr = new GlideRecord('x_1790227_event_ma_event_task');
+        gr.addQuery('u_event_id.number', eventId);
+        gr.query();
+        var result = [];
+        while (gr.next()) {
+            result.push(gr.getValue('number') + ' | ' + gr.getValue('u_task_name'));
+        }
+        return result.length ? result.join('\n') : 'No tasks found';
+    },
+
+    fetchEventAttendees: function() {
+        var eventId = this.getParameter('sysparm_event_id');
+        var gr = new GlideRecord('x_1790227_event_ma_attendee');
+        gr.addQuery('u_event_id.number', eventId);
+        gr.query();
+        var result = [];
+        while (gr.next()) {
+            result.push(gr.getValue('u_attendee_name') + ' | ' + gr.getValue('u_email'));
+        }
+        return result.length ? result.join('\n') : 'No attendees found';
+    },
+
+    fetchEventVendors: function() {
+        var eventId = this.getParameter('sysparm_event_id');
+        var gr = new GlideRecord('x_1790227_event_ma_vendor');
+        gr.addQuery('u_event_id.number', eventId);
+        gr.query();
+        var result = [];
+        while (gr.next()) {
+            result.push(gr.getValue('u_vendor_name') + ' | ' + gr.getValue('u_email'));
+        }
+        return result.length ? result.join('\n') : 'No vendors found';
+    },
+
+    fetchEventBudgetDetails: function() {
+        var eventId = this.getParameter('sysparm_event_id');
+        var gr = new GlideRecord('x_1790227_event_ma_budget');
+        gr.addQuery('u_event_id.number', eventId);
+        gr.query();
+        var result = [];
+        while (gr.next()) {
+            result.push(
+                'Total: ' + gr.getValue('u_total_budget') +
+                ', Spent: ' + gr.getValue('u_amount_spent') +
+                ', Remaining: ' + gr.getValue('u_amount_remaining')
+            );
+        }
+        return result.length ? result.join('\n') : 'No budget entries found';
+    },
+
+    fetchEventFeedback: function() {
+        var eventId = this.getParameter('sysparm_event_id');
+        var gr = new GlideRecord('x_1790227_event_ma_feedback');
+        gr.addQuery('u_event_id.number', eventId);
+        gr.query();
+        var result = [];
+        while (gr.next()) {
+            result.push(
+                'Attendee: ' + gr.getDisplayValue('u_attendee_id') +
+                ', Rating: ' + gr.getValue('u_rating') +
+                ', Comments: ' + gr.getValue('u_comments')
+            );
+        }
+        return result.length ? result.join('\n') : 'No feedback found';
+    },
+
+    calculateRemainingBudget: function() {
+        var eventId = this.getParameter('sysparm_event_id');
+        var gr = new GlideRecord('x_1790227_event_ma_budget');
+        gr.addQuery('u_event_id.number', eventId);
+        gr.query();
+        var result = [];
+        while (gr.next()) {
+            result.push('Remaining Budget: ' + gr.getValue('u_amount_remaining'));
+        }
+        return result.length ? result.join('\n') : 'Budget entry not found';
+    },
+
     type: 'EventUtilsClient'
 });
+
+	
+
+  
+
 ]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-08-04 10:13:44</sys_created_on>
         <sys_id>141ae91bc3c32210319033fc0501310d</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_name>EventUtilsClient</sys_name>
         <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
         <sys_update_name>sys_script_include_141ae91bc3c32210319033fc0501310d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-08-04 10:30:05</sys_updated_on>
+        <sys_updated_on>2025-08-04 22:22:53</sys_updated_on>
     </sys_script_include>
 </record_update>

@@ -2,6 +2,14 @@
     <element audit="true" db_object_id="77745d1fc3432210319033fc0501314f" extends="task" label="Budget" max_length="40" name="x_1790227_event_ma_budget" type="collection">
         <element attributes="omit_sys_original=true" label="Total Budget" max_length="20" name="u_total_budget" type="currency"/>
         <element attributes="encode_utf8=false" label="Event ID" max_length="32" name="u_event_id" reference="x_1790227_event_ma_event" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Status" max_length="40" name="u_status" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Approved" sequence="2" value="approved"/>
+                <element inactive_on_update="false" label="Pending Approval" sequence="1" value="pending approval"/>
+                <element inactive_on_update="false" label="Rejected" sequence="3" value="rejected"/>
+                <element inactive_on_update="false" label="Draft" sequence="0" value="draft"/>
+            </choice>
+        </element>
         <element attributes="omit_sys_original=true" calculation="(function calculatedFieldValue(current) {&#13;&#10;&#9;var ans = current.u_total_budget - current.u_amount_spent&#13;&#10;&#9;// Add your code here&#13;&#10;&#9;return ans;  // return the calculated value&#13;&#10;&#13;&#10;})(current);" label="Amount Remaining" max_length="20" name="u_amount_remaining" read_only="true" type="currency" virtual="true"/>
         <element attributes="omit_sys_original=true" label="Total Budget" max_length="20" name="u_currency_2" type="currency"/>
         <element attributes="omit_sys_original=true" label="Amount Spent" max_length="20" name="u_amount_spent" type="currency"/>

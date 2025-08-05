@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1790227_event_ma.BudgetUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>BudgetUtils</name>
+        <script><![CDATA[var BudgetUtils = Class.create();
+BudgetUtils.prototype = {
+    initialize: function() {},
+
+    // 1. Calculate total budget for an event
+    getTotalBudgetByEvent: function(eventID) {
+        var gr = new GlideAggregate('x_1790227_event_ma_budget');
+        gr.addQuery('u_event_id.number', eventID);
+        gr.addAggregate('SUM', 'u_total_budget');
+        gr.query();
+        if (gr.next()) {
+            return 'Total Budget: ' + gr.getAggregate('SUM', 'u_total_budget');
+        }
+        return 'No budget records found';
+    },
+
+    // 2. Check if a budget is approved
+    isBudgetApproved: function(eventID) {
+        var gr = new GlideRecord('x_1790227_event_ma_budget');
+        gr.addQuery('u_event_id.number', eventID);
+        gr.query();
+        if (gr.next()) {
+            return gr.u_status == 'approved' ? 'Budget Approved' : 'Budget Not Approved';
+        }
+        return 'Budget not found';
+    },
+
+    // 3. Fetch budget details by event ID
+    getBudgetDetailsByEvent: function(eventID) {
+        var gr = new GlideRecord('x_1790227_event_ma_budget');
+        gr.addQuery('u_event_id.number', eventID);
+        gr.query();
+        var result = [];
+        while (gr.next()) {
+            result.push(gr.u_total_budget + ' | ' + gr.u_amount_spent + ' | ' + gr.u_amount_remaining);
+        }
+        return result.length ? result.join('\n') : 'No budget details found';
+    },
+	// 4. Calculate remaining budget for an event
+	getRemainingBudget: function(eventID) {
+    var gr = new GlideAggregate('x_1790227_event_ma_budget');
+    gr.addQuery('u_event_id.number', eventID);
+    gr.addAggregate('SUM', 'u_amount_remaining');
+    gr.query();
+    if (gr.next()) {
+        return 'Remaining Budget: ' + gr.getAggregate('SUM', 'u_amount_remaining');
+    }
+    return 'No remaining budget data found';
+},
+
+
+    type: 'BudgetUtils'
+};
+
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-04 21:58:32</sys_created_on>
+        <sys_id>41ed08efc3cf2210319033fc05013140</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>BudgetUtils</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sys_script_include_41ed08efc3cf2210319033fc05013140</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-04 21:58:32</sys_updated_on>
+    </sys_script_include>
+</record_update>

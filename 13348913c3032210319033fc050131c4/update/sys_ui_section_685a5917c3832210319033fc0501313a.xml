@@ -4,13 +4,13 @@
             <element>number</element>
             <position>0</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2025-08-04 08:57:31</sys_created_on>
-            <sys_id>ef4b5d57c3832210319033fc050131ab</sys_id>
+            <sys_created_on>2025-08-04 20:37:55</sys_created_on>
+            <sys_id>579bb35bc38f2210319033fc0501317f</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Feedback Details" display_value="Feedback Details" name="x_1790227_event_ma_feedback" sys_domain="global" view="Default view">685a5917c3832210319033fc0501313a</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2025-08-04 08:57:31</sys_updated_on>
+            <sys_updated_on>2025-08-04 20:37:55</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -18,13 +18,13 @@
             <element>u_attendee_id</element>
             <position>1</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2025-08-04 08:57:31</sys_created_on>
-            <sys_id>674b5d57c3832210319033fc050131ac</sys_id>
+            <sys_created_on>2025-08-04 20:37:55</sys_created_on>
+            <sys_id>139bb35bc38f2210319033fc05013180</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Feedback Details" display_value="Feedback Details" name="x_1790227_event_ma_feedback" sys_domain="global" view="Default view">685a5917c3832210319033fc0501313a</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2025-08-04 08:57:31</sys_updated_on>
+            <sys_updated_on>2025-08-04 20:37:55</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -32,13 +32,13 @@
             <element>u_event_id</element>
             <position>2</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2025-08-04 08:57:31</sys_created_on>
-            <sys_id>eb4b5d57c3832210319033fc050131ac</sys_id>
+            <sys_created_on>2025-08-04 20:37:55</sys_created_on>
+            <sys_id>979bb35bc38f2210319033fc05013180</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Feedback Details" display_value="Feedback Details" name="x_1790227_event_ma_feedback" sys_domain="global" view="Default view">685a5917c3832210319033fc0501313a</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2025-08-04 08:57:31</sys_updated_on>
+            <sys_updated_on>2025-08-04 20:37:55</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -46,13 +46,13 @@
             <element>.split</element>
             <position>3</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2025-08-04 08:57:31</sys_created_on>
-            <sys_id>634b5d57c3832210319033fc050131ad</sys_id>
+            <sys_created_on>2025-08-04 20:37:55</sys_created_on>
+            <sys_id>1f9bb35bc38f2210319033fc05013180</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Feedback Details" display_value="Feedback Details" name="x_1790227_event_ma_feedback" sys_domain="global" view="Default view">685a5917c3832210319033fc0501313a</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2025-08-04 08:57:31</sys_updated_on>
+            <sys_updated_on>2025-08-04 20:37:55</sys_updated_on>
             <sys_user/>
             <type>.split</type>
         </sys_ui_element>
@@ -60,13 +60,13 @@
             <element>u_rating</element>
             <position>4</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2025-08-04 08:57:31</sys_created_on>
-            <sys_id>e74b5d57c3832210319033fc050131ad</sys_id>
+            <sys_created_on>2025-08-04 20:37:55</sys_created_on>
+            <sys_id>939bb35bc38f2210319033fc05013181</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Feedback Details" display_value="Feedback Details" name="x_1790227_event_ma_feedback" sys_domain="global" view="Default view">685a5917c3832210319033fc0501313a</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2025-08-04 08:57:31</sys_updated_on>
+            <sys_updated_on>2025-08-04 20:37:55</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -74,13 +74,27 @@
             <element>u_comments</element>
             <position>5</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2025-08-04 08:57:31</sys_created_on>
-            <sys_id>6f4b5d57c3832210319033fc050131ad</sys_id>
+            <sys_created_on>2025-08-04 20:37:55</sys_created_on>
+            <sys_id>1b9bb35bc38f2210319033fc05013181</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Feedback Details" display_value="Feedback Details" name="x_1790227_event_ma_feedback" sys_domain="global" view="Default view">685a5917c3832210319033fc0501313a</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2025-08-04 08:57:31</sys_updated_on>
+            <sys_updated_on>2025-08-04 20:37:55</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_reminder</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-08-04 20:37:55</sys_created_on>
+            <sys_id>9f9bb35bc38f2210319033fc05013181</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Feedback Details" display_value="Feedback Details" name="x_1790227_event_ma_feedback" sys_domain="global" view="Default view">685a5917c3832210319033fc0501313a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-08-04 20:37:55</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_1790227_event_ma.AttendeeUtilsClient</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>AttendeeUtilsClient</name>
+        <script><![CDATA[var AttendeeUtilsClient = Class.create();
+AttendeeUtilsClient.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+    createAttendee: function() {
+        var eventId = this.getParameter('sysparm_eventId');
+        var firstName = this.getParameter('sysparm_firstName');
+        var lastName = this.getParameter('sysparm_lastName');
+        var email = this.getParameter('sysparm_email');
+        var contactNumber = this.getParameter('sysparm_contactNumber');
+
+        var newAttendee = new GlideRecord('x_1790227_event_ma_attendee');
+        newAttendee.initialize();
+        newAttendee.u_first_name = firstName;
+        newAttendee.u_last_name = lastName;
+        newAttendee.u_email = email;
+        newAttendee.u_contact_number = contactNumber;
+        newAttendee.u_event_id = eventId;
+
+        var inserted = newAttendee.insert();
+        if (inserted) {
+            return 'success';
+        }
+        return 'failure';
+    },
+
+isAttendeeRegistered: function() {
+        var email = this.getParameter('sysparm_email');
+        var eventId = this.getParameter('sysparm_event_id');
+
+        var gr = new GlideRecord('x_1790227_event_ma_attendee');
+        gr.addQuery('u_email', email);
+        gr.addQuery('u_event_id.number', eventId);
+        gr.query();
+
+        while (gr.next()) {
+            return 'Attendee is Registerd';
+        }
+        return 'Attendee is not registerd';
+    },
+
+    getAttendeeDetailsById: function() {
+        var attendeeId = this.getParameter('sysparm_attendee_id');
+        var gr = new GlideRecord('x_1790227_event_ma_attendee');
+        gr.addQuery('number', attendeeId);
+        gr.query();
+
+        var result = [];
+        while (gr.next()) {
+            result.push(
+                'Name: ' + gr.getValue('u_first_name') + ' ' + gr.getValue('u_last_name') +
+                ', Email: ' + gr.getValue('u_email') +
+                ', Contact: ' + gr.getValue('u_contact_number') +
+                ', Event: ' + gr.getDisplayValue('u_event_id')
+            );
+        }
+        return result.length ? result.join('\n') : 'Attendee not found';
+    },
+
+    getAttendeesByEventId: function() {
+        var eventId = this.getParameter('sysparm_event_id');
+        var gr = new GlideRecord('x_1790227_event_ma_attendee');
+        gr.addQuery('u_event_id.number', eventId);
+        gr.query();
+
+        var result = [];
+        while (gr.next()) {
+            result.push(
+                gr.getValue('u_first_name') + ' ' + gr.getValue('u_last_name') +
+                ' (' + gr.getValue('u_email') + ')'
+            );
+        }
+        return result.length ? result.join('\n') : 'No attendees found';
+    },
+
+    type: 'AttendeeUtilsClient'
+});
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-04 17:07:35</sys_created_on>
+        <sys_id>2aea0bdbc38b2210319033fc050131c9</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>AttendeeUtilsClient</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sys_script_include_2aea0bdbc38b2210319033fc050131c9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-04 22:08:23</sys_updated_on>
+    </sys_script_include>
+</record_update>

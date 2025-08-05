@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1790227_event_ma.BudgetUtilsClient</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>BudgetUtilsClient</name>
+        <script><![CDATA[var BudgetUtilsClient = Class.create();
+BudgetUtilsClient.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+    approveBudget: function() {
+        var budgetId = this.getParameter('sysparm_budgetId');
+
+        var gr = new GlideRecord('x_1790227_event_ma_budget');
+        if (gr.get(budgetId)) {
+            gr.u_status = 'approved';
+            gr.update();
+
+            gs.eventQueue('x_1790227_event_ma.cancel.notify', gr, gr.assigned_to, gr.sys_id);
+            return 'success';
+        }
+        return 'failure';
+    },
+
+
+// 1. Calculate total budget
+    getTotalBudgetByEvent: function() {
+        var eventID = this.getParameter('sysparm_event_id');
+        var gr = new GlideAggregate('x_1790227_event_ma_budget');
+        gr.addQuery('u_event_id.number', eventID);
+        gr.addAggregate('SUM', 'u_total_budget');
+        gr.query();
+        while (gr.next()) {
+            return 'Total Budget: ' + gr.getAggregate('SUM', 'u_total_budget');
+        }
+        return 'No budget records found';
+    },
+
+    // 2. Check if budget is approved
+    isBudgetApproved: function() {
+        var eventId = this.getParameter('sysparm_event_id');
+        var gr = new GlideRecord('x_1790227_event_ma_budget');
+        gr.addQuery('u_event_id.number', eventId);
+        gr.addQuery('u_status', 'approved'); 
+        gr.query();
+		while(gr.next()){
+        return 'budget is approved' ;
+		}
+		return 'budget is not approved';
+    },
+
+    // 3. Fetch budget details
+    getBudgetDetailsByEventId: function() {
+        var eventId = this.getParameter('sysparm_event_id');
+        var gr = new GlideRecord('x_1790227_event_ma_budget');
+        gr.addQuery('u_event_id.number', eventId);
+        gr.query();
+
+        var result = [];
+        while (gr.next()) {
+            result.push(
+                'Amount: ' + gr.getValue('u_total_budget') +
+                ', Status: ' + gr.getValue('u_status') +
+                ', Description: ' + gr.getValue('u_description')
+            );
+        }
+        return result.length ? result.join('\n') : 'No budget details found';
+    },
+
+    type: 'BudgetUtilsClient'
+});
+
+
+   
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-04 18:05:27</sys_created_on>
+        <sys_id>7338579fc3cb2210319033fc05013111</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>BudgetUtilsClient</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sys_script_include_7338579fc3cb2210319033fc05013111</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-04 22:07:17</sys_updated_on>
+    </sys_script_include>
+</record_update>

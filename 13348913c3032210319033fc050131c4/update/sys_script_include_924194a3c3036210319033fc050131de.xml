@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1790227_event_ma.FeedbackUtilsClient</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>FeedbackUtilsClient</name>
+        <script><![CDATA[var FeedbackUtilsClient = Class.create();
+FeedbackUtilsClient.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+    getFeedbackDetailsById: function() {
+        var feedbackId = this.getParameter('sysparm_feedback_id');
+        var gr = new GlideRecord('x_1790227_event_ma_feedback');
+        gr.addQuery('number', feedbackId);
+        gr.query();
+
+        var result = [];
+        while (gr.next()) {
+            result.push(
+                'Event: ' + gr.getDisplayValue('u_event_id') +
+                ', Rating: ' + gr.getValue('u_rating') +
+                ', Comments: ' + gr.getValue('u_comments')
+            );
+        }
+        return result.length ? result.join('\n') : 'Feedback not found';
+    },
+
+    isFeedbackPositive: function() {
+        var feedbackId = this.getParameter('sysparm_feedback_id');
+        var gr = new GlideRecord('x_1790227_event_ma_feedback');
+        gr.addQuery('number', feedbackId);
+        gr.query();
+
+        while (gr.next()) {
+            var rating = gr.getValue('u_rating').toLowerCase();
+            if (rating === 'excellent' || rating === 'good') {
+                return 'Feedback is Positive';
+            }
+        }
+        return 'Feedback is Negative';
+    },
+
+    getFeedbackByEventId: function() {
+        var eventId = this.getParameter('sysparm_event_id');
+        var gr = new GlideRecord('x_1790227_event_ma_feedback');
+        gr.addQuery('u_event_id.number', eventId);
+        gr.query();
+
+        var result = [];
+        while (gr.next()) {
+            result.push(
+                gr.getValue('u_rating') + ': ' + gr.getValue('u_comments')
+            );
+        }
+        return result.length ? result.join('\n') : 'No feedback found';
+    },
+
+    type: 'FeedbackUtilsClient'
+});
+
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-04 22:13:14</sys_created_on>
+        <sys_id>924194a3c3036210319033fc050131de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>FeedbackUtilsClient</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sys_script_include_924194a3c3036210319033fc050131de</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-04 22:13:14</sys_updated_on>
+    </sys_script_include>
+</record_update>

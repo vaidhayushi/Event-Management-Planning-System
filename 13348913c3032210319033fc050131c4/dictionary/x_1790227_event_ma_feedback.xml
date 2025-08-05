@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="9f1a5517c3832210319033fc05013138" extends="task" label="Feedback" max_length="40" name="x_1790227_event_ma_feedback" type="collection">
+        <element label="Reminder" max_length="40" name="u_reminder" type="boolean"/>
         <element attributes="edge_encryption_enabled=true" choice="1" label="Rating" max_length="40" name="u_rating" type="string">
             <choice>
                 <element inactive_on_update="false" label="Excellent" sequence="0" value="excellent"/>

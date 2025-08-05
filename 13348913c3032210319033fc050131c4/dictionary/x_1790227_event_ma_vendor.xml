@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="16d2599bc3432210319033fc0501314f" extends="task" label="Vendor" max_length="40" name="x_1790227_event_ma_vendor" type="collection">
+        <element attributes="encode_utf8=false" label="Event ID" max_length="32" name="u_event_id" reference="x_1790227_event_ma_event" type="reference"/>
         <element attributes="edge_encryption_enabled=true" label="Services Provided" max_length="40" name="u_services_provided" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Delivery Date" max_length="40" name="u_delivery_date" type="glide_date"/>
         <element attributes="edge_encryption_enabled=true" label="Vendor Name" max_length="40" name="u_vendor_name" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Contact Number" max_length="40" name="u_contact_number" type="string"/>
+        <element label="Marked As Completed" max_length="40" name="u_marked_as_completed" type="boolean"/>
+        <element label="Reminder" max_length="40" name="u_reminder" type="boolean"/>
         <element attributes="edge_encryption_enabled=true" label="Email" max_length="40" name="u_email" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Contact Person" max_length="40" name="u_contact_person" type="string"/>
     </element>

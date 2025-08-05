@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var rows = gel('rows').value;
+rows = JSON.parse(rows);
+buildCards(rows);
+var elm = jQuery('a[href], [tabindex]')[0];
+if (elm) {
+    elm.focus();
+}
+
+function buildCards(data) {
+    var i = 0;
+    if (data[0] != '') {
+        while (i < data.length) {
+            var info = buildBody(data, i);
+            if (info.name != '') {
+                var window = new Array();
+                window[i] = createGlideWindow(data[i].inst_id, 'id' + data[i].inst_id, true, info.name, info.body);
+                i++;
+            }
+        }
+    }
+}
+
+function createGlideWindow(div, id, readOnly, title, body) {
+    var w = new GlideWindow(id, readOnly);
+    w.setPosition('relative');
+    w.setTitle(title);
+    w.setSize("100%", "");
+    w.setBody(body);
+    w.setFontSize(12);
+    w.setFontWeight("normal");
+    w.setHeaderColor("");
+    w.setClassName("drag_section asmt-card");
+    w.insert(div);
+    return w;
+}
+
+function buildBody(data, id) {
+    var body = '<table style="width: 100%;"><tbody><tr>';
+    body += '<td style="max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%">';
+    body += '<h2 style="font-size: 15px; font-weight: bold; overflow:hidden; text-overflow:ellipsis;">' + data[id].name + '</h2>';
+    body += '<div style="font-size: 12px;">Date: ' + data[id].date + '</div>';
+    body += '<div style="font-size: 12px;">Location: ' + data[id].location + '</div>';
+    body += '<div style="font-size: 12px;">Status: ' + data[id].status + '</div>';
+    body += '</td></tr></tbody></table>';
+    return {body: body, name: data[id].name};
+}
+]]></client_script>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_1790227_event_ma_upcoming_events_dashboard.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:g2="glide_ui">
+    <g:requires name="styles/assessment.css" />
+    <g:evaluate var="eventsHTML" object="true" jelly="true">
+        var eventsHTML = '';
+        var gr = new GlideRecord('x_1790227_event_ma_event');
+        gr.addQuery('u_event_date', '>=', gs.nowDateTime());
+        gr.query();
+
+        if (gr.getRowCount() == 0) {
+            eventsHTML = '<div style="padding: 10px;"><h3>No upcoming events found.</h3></div>';
+        } else {
+            eventsHTML = '<input type="hidden" id="rows" name="rows" value="' + JSON.stringify([]) + '" />';
+            eventsHTML += '<div class="container-fluid"><div class="row">';
+            var i = 0;
+            var dataArr = [];
+            while (gr.next()) {
+                if (i % 3 === 0 $[AMP]$[AMP] i != 0)
+                    eventsHTML += '</div><div class="row">';
+
+                eventsHTML += '<div class="col-sm-4 col-md-4 col-lg-4" style="margin-bottom:15px;">';
+                eventsHTML += '<div id="' + gr.getUniqueValue() + '" class="asmt-card-container" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #f9f9f9;">';
+                eventsHTML += '<h4>' + gr.getDisplayValue('u_event_name') + '</h4>';
+                eventsHTML += '<p><b>Date:</b> ' + gr.getDisplayValue('u_event_date') + '</p>';
+                eventsHTML += '<p><b>Location:</b> ' + gr.getDisplayValue('u_location') + '</p>';
+                eventsHTML += '<p><b>Status:</b> ' + gr.getDisplayValue('u_status') + '</p>';
+                eventsHTML += '<a href="event_details_dashboard.do?sysparm_event_id=' + gr.getUniqueValue() + '" class="btn btn-primary">View Details</a>';
+                eventsHTML += '</div></div>';
+
+                var record = {
+                    inst_id: gr.getUniqueValue(),
+                    name: gr.getDisplayValue('u_event_name'),
+                    date: gr.getDisplayValue('u_event_date'),
+                    location: gr.getDisplayValue('u_location'),
+                    status: gr.getDisplayValue('u_status')
+                };
+                dataArr.push(record);
+                i++;
+            }
+            eventsHTML += '</div></div>';
+            eventsHTML = eventsHTML.replace('[]', new JSON().encode(dataArr));
+        }
+    </g:evaluate>
+
+    <h2 style="text-align:center;">Upcoming Events Dashboard</h2>
+    <g:no_escape>
+        $[eventsHTML]
+    </g:no_escape>
+</j:jelly>
+]]></html>
+        <name>upcoming_events_dashboard</name>
+        <processing_script><![CDATA[(function() {
+    data.title = "Upcoming Events Dashboard";
+})();
+
+]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-04 18:44:12</sys_created_on>
+        <sys_id>6ac0a357c30f2210319033fc05013189</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>upcoming_events_dashboard</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sys_ui_page_6ac0a357c30f2210319033fc05013189</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-04 19:45:46</sys_updated_on>
+    </sys_ui_page>
+</record_update>

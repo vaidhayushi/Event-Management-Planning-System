@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function onLoad() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var eventId = urlParams.get('sysparm_event_id');
+
+    var ga = new GlideAjax('EventDashboardUtils');
+    ga.addParam('sysparm_name', 'getEventDetails');
+    ga.addParam('sysparm_eventId', eventId);
+
+    ga.getXMLAnswer(function(response) {
+        var data = JSON.parse(response);
+        var detailsDiv = document.getElementById('eventDetails');
+
+        var html = '<h3>Tasks</h3><ul>';
+        data.tasks.forEach(function(task) {
+            html += '<li>' + task.name + ' - ' + task.status + '</li>';
+        });
+        html += '</ul>';
+
+        html += '<h3>Attendees</h3><ul>';
+        data.attendees.forEach(function(att) {
+            html += '<li>' + att.name + '</li>';
+        });
+        html += '</ul>';
+
+        html += '<h3>Vendors</h3><ul>';
+        data.vendors.forEach(function(vendor) {
+            html += '<li>' + vendor.name + '</li>';
+        });
+        html += '</ul>';
+
+        html += '<h3>Budget</h3>';
+        html += '<p>Total: ' + data.budget.total + ', Spent: ' + data.budget.spent + ', Remaining: ' + data.budget.remaining + ', Status: ' + data.budget.status + '</p>';
+
+        html += '<h3>Feedback</h3><ul>';
+        data.feedback.forEach(function(fb) {
+            html += '<li>Rating: ' + fb.rating + ' - Comments: ' + fb.comments + '</li>';
+        });
+        html += '</ul>';
+
+        detailsDiv.innerHTML = html;
+    });
+}
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_1790227_event_ma_event_details_dashboard.do</endpoint>
+        <html><![CDATA[<h2>Event Details Dashboard</h2>
+<div id="eventDetails">Loading event details...</div>]]></html>
+        <name>event_details_dashboard</name>
+        <processing_script><![CDATA[(function() {
+    data.title = "Event Details Dashboard";
+})();
+]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-04 19:22:39</sys_created_on>
+        <sys_id>371a2fd3c34f2210319033fc05013171</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>event_details_dashboard</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sys_ui_page_371a2fd3c34f2210319033fc05013171</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-04 19:22:39</sys_updated_on>
+    </sys_ui_page>
+</record_update>
