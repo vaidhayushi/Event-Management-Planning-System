@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope) {
+    var c = this;
+
+    c.viewTask = function(taskId) {
+        var url = '/event_management?id=task_details&sys_id=' + taskId;
+        window.location.href = url;
+    };
+
+    c.editTask = function(taskId) {
+        var url = '/event_management?sys_id=' + taskId+'&view=sp&id=form&table=x_1790227_event_ma_event_task';
+        window.location.href = url;
+    };
+
+    c.deleteTask = function(taskId) {
+        if(confirm('Are you sure you want to delete this task?')) {
+            alert('Delete logic for Task ID: ' + taskId);
+        }
+    };
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.hc-widget {
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+}
+
+.hc-widget .panel-heading {
+    background-color: #6A0DAD; /* Lavender/Wine Color */
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px 8px 0 0;
+}
+
+.hc-widget .panel-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f2e6ff;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>task_list</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Task List</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    data.tasks = [];
+    var gr = new GlideRecord('x_1790227_event_ma_event_task');  
+    gr.addQuery('active', true);
+    gr.orderByDesc('u_due_date');
+    gr.query();
+
+    while (gr.next()) {
+        data.tasks.push({
+            sys_id: gr.getUniqueValue(),
+            task_name: gr.getValue('u_task_name'),
+            event_name: gr.getDisplayValue('u_event_id'),
+            assigned_to: gr.getDisplayValue('u_assigned_to'),
+            due_date: gr.getDisplayValue('u_due_date'),
+            status: gr.getDisplayValue('u_status')
+        });
+    }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 17:50:24</sys_created_on>
+        <sys_id>7c9e9cbbc307a210319033fc05013176</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Task List</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sp_widget_7c9e9cbbc307a210319033fc05013176</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 18:16:12</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default hc-widget">
+    <div class="panel-heading">
+        <h4 class="panel-title"><i class="fa fa-tasks"></i> Task Directory</h4>
+    </div>
+    <div class="panel-body table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Event</th>
+                    <th>Assigned To</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="task in c.data.tasks">
+                    <td>{{ task.task_name }}</td>
+                    <td>{{ task.event_name }}</td>
+                    <td>{{ task.assigned_to }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.status }}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-sm btn-primary" ng-click="c.viewTask(task.sys_id)">
+                            <i class="fa fa-eye"></i> View
+                        </a>
+                        <button class="btn btn-sm btn-warning" ng-click="c.editTask(task.sys_id)">
+                            <i class="fa fa-edit"></i> Edit
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="c.data.tasks.length === 0">
+                    <td colspan="6" class="text-center text-muted">No tasks found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

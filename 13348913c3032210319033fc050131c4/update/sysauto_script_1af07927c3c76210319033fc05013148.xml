@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time>1970-01-01 01:00:00</entered_time>
+        <max_drift/>
+        <name>Event data jobs</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2025-08-05 05:12:40</run_start>
+        <run_time>1970-01-01 01:00:00</run_time>
+        <run_type>once</run_type>
+        <script><![CDATA[(function executeJob() {
+    var eventSysId = '<EVENT_SYS_ID>'; // Replace with actual Event Sys_ID or loop through events
+    var utils = new EventDataUtils();
+
+    utils.fetchTasksForEvent(eventSysId);
+    utils.cancelOverdueTasks();
+    utils.fetchAttendeesForEvent(eventSysId);
+    utils.fetchVendorsForEvent(eventSysId);
+    utils.fetchBudgetForEvent(eventSysId);
+    utils.fetchFeedbackForEvent(eventSysId);
+    utils.fetchScheduleForEvent(eventSysId);
+    utils.fetchVenueForEvent(eventSysId);
+})();
+]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 05:12:12</sys_created_on>
+        <sys_id>1af07927c3c76210319033fc05013148</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Event data jobs</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sysauto_script_1af07927c3c76210319033fc05013148</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 05:12:12</sys_updated_on>
+        <time_zone>GMT</time_zone>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

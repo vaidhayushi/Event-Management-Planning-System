@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="pa_m2m_dashboard_tabs">
+    <pa_m2m_dashboard_tabs action="INSERT_OR_UPDATE">
+        <dashboard display_value="Event Management Dashboard">8124e12bc3876210319033fc0501312c</dashboard>
+        <home>false</home>
+        <homepage/>
+        <order>2</order>
+        <sys_class_name>pa_m2m_dashboard_tabs</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 04:15:53</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>3b64a92bc3876210319033fc0501314a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>8124e12bc3876210319033fc0501312c</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>pa_m2m_dashboard_tabs_3b64a92bc3876210319033fc0501314a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 04:15:53</sys_updated_on>
+        <tab display_value="New Tab 2">376429e7c3876210319033fc0501316f</tab>
+    </pa_m2m_dashboard_tabs>
+</record_update>

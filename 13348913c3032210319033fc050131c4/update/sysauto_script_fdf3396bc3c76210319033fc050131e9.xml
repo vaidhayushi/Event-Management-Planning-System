@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time>1970-01-01 00:00:00</entered_time>
+        <max_drift/>
+        <name>Daily Task Reminder for Planners</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2025-08-05 05:23:44</run_start>
+        <run_time>1970-01-01 00:00:00</run_time>
+        <run_type>daily</run_type>
+        <script><![CDATA[(function executeJob() {
+    var taskGR = new GlideRecord('x_1790227_event_ma_event_task');
+    var gdt = new GlideDateTime();
+    var tomorrow = new GlideDateTime();
+    tomorrow.addDaysUTC(1);
+
+    taskGR.addQuery('u_due_date', '>=', gdt);
+    taskGR.addQuery('u_due_date', '<=', tomorrow);
+    taskGR.addQuery('u_status', '!=', 'Completed');
+    taskGR.query();
+
+    while (taskGR.next()) {
+        var eventGR = taskGR.u_event_id.getRefRecord();
+        if (eventGR && eventGR.u_planner) {
+            gs.eventQueue('x_1790227_event_ma.task.due.reminder', eventGR, eventGR.u_planner, taskGR.sys_id);
+            gs.print('Reminder sent to Planner: ' + eventGR.u_planner.getDisplayValue() + ' for Task: ' + taskGR.u_task_name);
+        }
+    }
+})();
+]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 05:28:58</sys_created_on>
+        <sys_id>fdf3396bc3c76210319033fc050131e9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Daily Task Reminder for Planners</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sysauto_script_fdf3396bc3c76210319033fc050131e9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 05:28:58</sys_updated_on>
+        <time_zone>GMT</time_zone>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

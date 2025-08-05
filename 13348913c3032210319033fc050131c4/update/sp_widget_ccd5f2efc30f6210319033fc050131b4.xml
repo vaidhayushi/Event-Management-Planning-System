@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+	c.viewEvent = function(eventId) {
+        var url = '/event_management?id=event_details&sys_id=' + eventId;
+        window.location.href = url;
+    };
+
+    c.rescheduleEvent = function(eventId) {
+        var url = '/event_management?sys_id='+ eventId+'&view=sp&id=form&table=x_1790227_event_ma_event';
+        window.location.href = url;
+    };
+
+    c.cancelEvent = function(eventId) {
+        if(confirm('Are you sure you want to cancel this event?')) {
+            alert('Cancel logic for Event ID: ' + eventId); 
+        }
+    };
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.upcoming-events-widget {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.upcoming-events-widget h3 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+}
+.table th {
+    background-color: #f8f9fa;
+}
+.label-success {
+    background-color: #4caf50;
+}
+.label-warning {
+    background-color: #ff9800;
+}
+.label-danger {
+    background-color: #f44336;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>upcoming_events</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Upcomping Events</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    data.events = [];
+
+    var now = new GlideDateTime(); // Current DateTime object
+
+    var gr = new GlideRecord('x_1790227_event_ma_event'); 
+    gr.addQuery('u_event_date', '>=', now); 
+    gr.orderBy('u_event_date');
+    gr.query();
+
+    while(gr.next()) {
+        data.events.push({
+            sys_id: gr.getValue('sys_id'),
+            name: gr.getValue('u_event_name'),
+            date: gr.getDisplayValue('u_event_date'),
+            location: gr.getValue('u_location'),
+            status: gr.getDisplayValue('u_status')
+        });
+    }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 10:12:20</sys_created_on>
+        <sys_id>ccd5f2efc30f6210319033fc050131b4</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>Upcomping Events</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sp_widget_ccd5f2efc30f6210319033fc050131b4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 16:17:05</sys_updated_on>
+        <template><![CDATA[<div class="upcoming-events-widget">
+    <h3>Upcoming Events</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="event in data.events">
+                <td>{{ event.name }}</td>
+                <td>{{ event.date }}</td>
+                <td>{{ event.location }}</td>
+                <td>
+                    <span class="label" ng-class="{'label-success': event.status=='Scheduled', 'label-warning': event.status=='Pending', 'label-danger': event.status=='Cancelled'}">
+                        {{ event.status }}
+                    </span>
+                </td>
+                <td>
+                    <button class="btn btn-info btn-sm" ng-click="c.viewEvent(event.sys_id)">View Details</button>
+                    <button class="btn btn-warning btn-sm" ng-click="c.rescheduleEvent(event.sys_id)">View Form</button>
+                </td>
+            </tr>
+            <tr ng-if="data.events.length == 0">
+                <td colspan="5" class="text-center">No upcoming events.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

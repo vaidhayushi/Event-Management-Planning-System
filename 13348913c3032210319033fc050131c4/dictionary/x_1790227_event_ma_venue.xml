@@ -2,7 +2,9 @@
     <element audit="true" db_object_id="36b79153c3832210319033fc050131f3" extends="task" label="Venue" max_length="40" name="x_1790227_event_ma_venue" type="collection">
         <element attributes="edge_encryption_enabled=true" label="Contact Number" max_length="40" name="u_contact_number" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Contact Person" max_length="40" name="u_contact_person" type="string"/>
+        <element attributes="encode_utf8=false" label="Event ID" max_length="32" name="u_event_id" reference="x_1790227_event_ma_event" type="reference"/>
         <element label="Capacity" max_length="40" name="u_capacity" type="integer"/>
+        <element label="Available" max_length="40" name="u_available" type="boolean"/>
         <element attributes="edge_encryption_enabled=true" label="Venue Name" max_length="40" name="u_venue_name" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="Location" max_length="40" name="u_location" type="string"/>
         <element label="Availability" max_length="40" name="u_availability" type="boolean"/>

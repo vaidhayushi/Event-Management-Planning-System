@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>standard</category>
+        <client_script/>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance_menu</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list>title</field_list>
+        <has_preview>false</has_preview>
+        <id>custom_event_header</id>
+        <internal>false</internal>
+        <link/>
+        <name>Custom Event Header Menu </name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    data.user = {};
+    var userGR = new GlideRecord('sys_user');
+    if (userGR.get(gs.getUserID())) {
+        data.user.name = userGR.getDisplayValue('name');
+    }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 06:44:45</sys_created_on>
+        <sys_id>28860e63c34b6210319033fc050131b1</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Custom Event Header Menu </sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sp_widget_28860e63c34b6210319033fc050131b1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 07:14:22</sys_updated_on>
+        <template><![CDATA[<div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #2C3E50 !important; border-bottom: 2px solid #1A252F;">
+    <div class="container-fluid">
+        <!-- Company Logo -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="javascript:void(0)" style="color: #FFFFFF !important; font-weight:bold;">
+                Company Logo
+            </a>
+        </div>
+
+        <!-- Navigation Menu -->
+        <ul class="nav navbar-nav">
+            <li><a href="javascript:void(0)" style="color: #FFFFFF !important; font-weight:600;">Home</a></li>
+            <li><a href="javascript:void(0)" style="color: #FFFFFF !important; font-weight:600;">Events</a></li>
+            <li><a href="javascript:void(0)" style="color: #FFFFFF !important; font-weight:600;">Tasks</a></li>
+            <li><a href="javascript:void(0)" style="color: #FFFFFF !important; font-weight:600;">Attendees</a></li>
+            <li><a href="javascript:void(0)" style="color: #FFFFFF !important; font-weight:600;">Feedback</a></li>
+            <li><a href="javascript:void(0)" style="color: #FFFFFF !important; font-weight:600;">Venues</a></li>
+            <li><a href="javascript:void(0)" style="color: #FFFFFF !important; font-weight:600;">Reports</a></li>
+            <li><a href="javascript:void(0)" style="color: #FFFFFF !important; font-weight:600;">Settings</a></li>
+        </ul>
+
+        <!-- User Profile Dropdown -->
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" style="color: #FFFFFF !important;">
+                    <i class="fa fa-user"></i> {{::data.user.name}} <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)" ng-click="c.goTo('profile')">Profile</a></li>
+                    <li><a href="javascript:void(0)" ng-click="c.goTo('settings')">Settings</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/logout.do">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

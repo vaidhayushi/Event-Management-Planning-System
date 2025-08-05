@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, spUtil) {
+    var c = this;
+
+    c.addNote = function() {
+        if (!c.newNote) {
+            alert("Please enter a note.");
+            return;
+        }
+
+        c.server.update({
+            action: 'addNote',
+            taskSysId: c.data.task.sys_id,
+            noteText: c.newNote
+        }).then(function(response) {
+            if (response.data.addNoteStatus === 'success') {
+                alert("Work note added successfully.");
+                spUtil.refresh($scope);  // Refresh widget
+            } else {
+                alert("Failed to add note.");
+            }
+        });
+    };
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.hc-widget {
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+}
+
+.hc-widget .panel-heading {
+    background-color: #7209b7; /* Deep Purple */
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px 8px 0 0;
+}
+
+.hc-widget .panel-title a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #eee;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>task_details</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Task Details</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    data.task = {};
+    data.notes = [];
+
+    var taskSysId = $sp.getParameter('sys_id');
+
+    if (!taskSysId) {
+        data.error = "No Task ID provided.";
+        return;
+    }
+
+    // Fetch Task Details
+    var taskGR = new GlideRecord('x_1790227_event_ma_event_task');
+    if (taskGR.get(taskSysId)) {
+        data.task = {
+            sys_id: taskGR.getUniqueValue(),
+            name: taskGR.getValue('u_task_name'),
+            event: taskGR.getDisplayValue('u_event_id'),
+            assigned_to: taskGR.getDisplayValue('u_assigned_to'),
+            due_date: taskGR.getDisplayValue('u_due_date'),
+            status: taskGR.getDisplayValue('u_status'),
+            description: taskGR.getValue('u_description')
+        };
+    } else {
+        data.error = "Task not found.";
+        return;
+    }
+
+    // Fetch Work Notes
+    var noteGR = new GlideRecord('sys_journal_field');
+    noteGR.addQuery('element_id', taskSysId);
+    noteGR.addQuery('element', 'work_notes');
+    noteGR.query();
+
+    while (noteGR.next()) {
+        data.notes.push({
+            sys_created_on: noteGR.getDisplayValue('sys_created_on'),
+            sys_created_by: noteGR.getDisplayValue('sys_created_by'),
+            value: noteGR.getValue('value')
+        });
+    }
+
+    // Handle Add Work Note from Client
+    if (input && input.action === 'addNote') {
+        var task = new GlideRecord('x_1790227_event_ma_event_task');
+        if (task.get(input.taskSysId)) {
+            task.work_notes = input.noteText;
+            task.update();
+            data.addNoteStatus = 'success';
+        } else {
+            data.addNoteStatus = 'failure';
+        }
+    }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 16:58:17</sys_created_on>
+        <sys_id>e1c298bbc3c3a210319033fc05013186</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Task Details</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sp_widget_e1c298bbc3c3a210319033fc05013186</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 18:05:54</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default hc-widget" ng-if="!c.data.error">
+    <!-- Breadcrumb -->
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a href="?id=em_home">Home</a> > <a href="?id=task_list">Tasks</a> > Task Details
+        </h4>
+    </div>
+
+    <!-- Task Overview -->
+    <div class="panel-body">
+        <h3>{{ c.data.task.name }}</h3>
+        <p><strong>Event:</strong> {{ c.data.task.event }}</p>
+        <p><strong>Assigned To:</strong> {{ c.data.task.assigned_to }}</p>
+        <p><strong>Due Date:</strong> {{ c.data.task.due_date }}</p>
+        <p><strong>Status:</strong> {{ c.data.task.status }}</p>
+        <p><strong>Description:</strong> {{ c.data.task.description }}</p>
+    </div>
+
+    <!-- Activity/Notes Section -->
+    <div class="panel-body">
+        <h4>Work Notes</h4>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="note in c.data.notes">
+                <p>{{ note.value }}</p>
+                <small class="text-muted">By {{ note.sys_created_by }} on {{ note.sys_created_on }}</small>
+            </li>
+            <li class="list-group-item" ng-if="c.data.notes.length === 0">
+                No work notes found.
+            </li>
+        </ul>
+
+        <!-- Add Work Note -->
+        <textarea class="form-control" placeholder="Add a work note..." ng-model="c.newNote" rows="3"></textarea>
+        <button class="btn btn-primary mt-2" ng-click="c.addNote()">Add Note</button>
+    </div>
+</div>
+
+<div class="alert alert-danger" ng-if="c.data.error">{{ c.data.error }}</div>
+]]></template>
+    </sp_widget>
+</record_update>

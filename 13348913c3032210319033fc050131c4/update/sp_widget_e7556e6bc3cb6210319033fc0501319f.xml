@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope) { 
+    $scope.goToVenueBooking = function() { 
+        var recordProducerSysId = 'bbe614ebc3036210319033fc05013197'; 
+        var url = '/sp?id=record_producer&sys_id=' + recordProducerSysId; 
+        window.location.href = url; 
+    }; 
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.custom-action-card-venue {
+    background: linear-gradient(135deg, #e3f2fd, #f0f7ff);
+    border-radius: 20px;
+    padding: 30px 20px;
+    box-shadow: 0 8px 20px rgba(21, 101, 192, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.custom-action-card-venue:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(21, 101, 192, 0.2);
+}
+
+.icon-wrapper-venue {
+    background: #1565c0;
+    color: white;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    box-shadow: 0 4px 10px rgba(21, 101, 192, 0.4);
+}
+
+.custom-action-card-venue h4 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #0d47a1;
+}
+
+.action-btn-venue {
+    background: #1e88e5;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+.action-btn-venue:hover {
+    background: #1565c0;
+    color: #fff;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>request_venue</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Request Venue</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 08:59:55</sys_created_on>
+        <sys_id>e7556e6bc3cb6210319033fc0501319f</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Request Venue</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sp_widget_e7556e6bc3cb6210319033fc0501319f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 10:43:45</sys_updated_on>
+        <template><![CDATA[<div class="custom-action-card-venue text-center">
+    <div class="icon-wrapper-venue">
+        <i class="fa fa-building"></i>
+    </div>
+    <h4>Request Venue Booking</h4>
+    <button class="action-btn-venue" ng-click="goToVenueBooking()">
+        <i class="fa fa-plus"></i> Request
+    </button>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

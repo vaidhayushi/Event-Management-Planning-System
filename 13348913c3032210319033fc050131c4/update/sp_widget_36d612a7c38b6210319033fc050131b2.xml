@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope) { 
+    $scope.goToAssignTaskProducer = function() { 
+        var recordProducerSysId = '3f42ded7c3872210319033fc05013185';
+        var url = '/sp?id=record_producer&sys_id=' + recordProducerSysId; 
+        window.location.href = url; 
+    }; 
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.custom-action-card-assign {
+    background: linear-gradient(135deg, #f3e5f5, #f9f1fc);
+    border-radius: 20px;
+    padding: 30px 20px;
+    box-shadow: 0 8px 20px rgba(102, 51, 153, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.custom-action-card-assign:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(102, 51, 153, 0.2);
+}
+
+.icon-wrapper-assign {
+    background: #6a1b9a;
+    color: white;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    box-shadow: 0 4px 10px rgba(106, 27, 154, 0.4);
+}
+
+.custom-action-card-assign h4 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #6a1b9a;
+}
+
+.action-btn-assign {
+    background: #8e24aa;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+.action-btn-assign:hover {
+    background: #6a1b9a;
+    color: #fff;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>assign_task</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Assign Task</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 07:57:13</sys_created_on>
+        <sys_id>36d612a7c38b6210319033fc050131b2</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Assign Task</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sp_widget_36d612a7c38b6210319033fc050131b2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 10:42:07</sys_updated_on>
+        <template><![CDATA[<div class="custom-action-card-assign text-center">
+    <div class="icon-wrapper-assign">
+        <i class="fa fa-tasks"></i>
+    </div>
+    <h4>Assign Task</h4>
+    <button class="action-btn-assign" ng-click="goToAssignTaskProducer()">
+        <i class="fa fa-plus"></i> Assign
+    </button>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

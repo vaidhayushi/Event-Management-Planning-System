@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.hc-widget {
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+}
+
+.hc-widget .panel-heading {
+    background-color: #6A1B9A;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+}
+
+.nav-tabs&gt;li&gt;a {
+    font-weight: 600;
+    color: #6A1B9A;
+}
+.nav-tabs&gt;li.active&gt;a {
+    background-color: #6A1B9A !important;
+    color: white !important;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>event_details</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Event Details</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    data.event = {};
+    var sysId = $sp.getParameter('sys_id');
+
+    if (!sysId) {
+        data.error = "No Event ID provided.";
+        return;
+    }
+
+    var gr = new GlideRecord('x_1790227_event_ma_event');
+    if (gr.get(sysId)) {
+        data.event = {
+            name: gr.getValue('u_event_name'),
+            date: gr.getDisplayValue('u_event_date'),
+            location: gr.getValue('u_location'),
+            status: gr.getDisplayValue('u_status'),
+            contact_person: gr.getValue('u_contact_person'),
+            contact_number: gr.getValue('u_contact_number'),
+            email: gr.getValue('u_email')
+        };
+    } else {
+        data.error = "Event not found.";
+        return;
+    }
+
+    data.tasks = [];
+    var taskGR = new GlideRecord('x_1790227_event_ma_event_task');
+    taskGR.addQuery('u_event_id', sysId);
+    taskGR.query();
+    while (taskGR.next()) {
+        data.tasks.push({
+            name: taskGR.getValue('u_task_name'),
+            assigned_to: taskGR.getDisplayValue('u_assigned_to'),
+            due_date: taskGR.getDisplayValue('u_due_date'),
+            status: taskGR.getDisplayValue('u_status'),
+            sys_id: taskGR.getUniqueValue()
+        });
+    }
+
+    data.attendees = [];
+    var attendeeGR = new GlideRecord('x_1790227_event_ma_attendee');
+    attendeeGR.addQuery('u_event_id', sysId);
+    attendeeGR.query();
+    while (attendeeGR.next()) {
+        data.attendees.push({
+            name: attendeeGR.getValue('u_attendee_name'),
+            email: attendeeGR.getValue('u_email'),
+            contact: attendeeGR.getValue('u_contact_number'),
+            status: attendeeGR.getDisplayValue('u_status')
+        });
+    }
+
+    data.vendors = [];
+    var vendorGR = new GlideRecord('x_1790227_event_ma_vendor');
+    vendorGR.addQuery('u_event_id', sysId);
+    vendorGR.query();
+    while (vendorGR.next()) {
+        data.vendors.push({
+            name: vendorGR.getValue('u_vendor_name'),
+            contact_person: vendorGR.getValue('u_contact_person'),
+            contact_number: vendorGR.getValue('u_contact_number'),
+            services: vendorGR.getValue('u_services')
+        });
+    }
+
+    data.budget = {};
+    var budgetGR = new GlideRecord('x_1790227_event_ma_budget');
+    budgetGR.addQuery('u_event_id', sysId);
+    if (budgetGR.next()) {
+        data.budget = {
+            total: budgetGR.getValue('u_total_budget'),
+            spent: budgetGR.getValue('u_amount_spent'),
+            remaining: budgetGR.getValue('u_amount_remaining'),
+            status: budgetGR.getDisplayValue('u_status')
+        };
+    }
+
+    data.schedule = [];
+    var scheduleGR = new GlideRecord('x_1790227_event_ma_schedule');
+    scheduleGR.addQuery('u_event_id', sysId);
+    scheduleGR.query();
+    while (scheduleGR.next()) {
+        data.schedule.push({
+            activity: scheduleGR.getValue('u_activity_name'),
+            start: scheduleGR.getDisplayValue('u_start_time'),
+            end: scheduleGR.getDisplayValue('u_end_time'),
+            location: scheduleGR.getValue('u_location')
+        });
+    }
+
+    data.feedback = [];
+    var feedbackGR = new GlideRecord('x_1790227_event_ma_feedback');
+    feedbackGR.addQuery('u_event_id', sysId);
+    feedbackGR.query();
+    while (feedbackGR.next()) {
+        data.feedback.push({
+            attendee: feedbackGR.getDisplayValue('u_attendee'),
+            rating: feedbackGR.getValue('u_rating'),
+            comments: feedbackGR.getValue('u_comments')
+        });
+    }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 10:47:38</sys_created_on>
+        <sys_id>377cf6e7c34f6210319033fc0501317e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Event Details</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sp_widget_377cf6e7c34f6210319033fc0501317e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 15:17:25</sys_updated_on>
+        <template><![CDATA[<div class="hc-widget panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><i class="fa fa-calendar"></i> {{ data.event.name }}</h4>
+    </div>
+    <div class="panel-body">
+        <p><strong>Date:</strong> {{ data.event.date }}</p>
+        <p><strong>Location:</strong> {{ data.event.location }}</p>
+        <p><strong>Status:</strong> {{ data.event.status }}</p>
+        <p><strong>Contact:</strong> {{ data.event.contact_person }} | {{ data.event.contact_number }} | {{ data.event.email }}</p>
+    </div>
+</div>
+
+<!-- Tabs Navigation -->
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#tasks">Tasks</a></li>
+    <li><a data-toggle="tab" href="#attendees">Attendees</a></li>
+    <li><a data-toggle="tab" href="#vendors">Vendors</a></li>
+    <li><a data-toggle="tab" href="#budget">Budget</a></li>
+    <li><a data-toggle="tab" href="#schedule">Schedule</a></li>
+    <li><a data-toggle="tab" href="#feedback">Feedback</a></li>
+    <li><a data-toggle="tab" href="#notes">Notes</a></li>
+</ul>
+
+<div class="tab-content mt-3">
+
+    <!-- Tasks Tab -->
+    <div id="tasks" class="tab-pane fade in active">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Assigned To</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="task in data.tasks">
+                    <td>{{task.name}}</td>
+                    <td>{{task.assigned_to}}</td>
+                    <td>{{task.due_date}}</td>
+                    <td>{{task.status}}</td>
+                </tr>
+                <tr ng-if="data.tasks.length === 0">
+                    <td colspan="4" class="text-center">No tasks found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Attendees Tab -->
+    <div id="attendees" class="tab-pane fade">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="att in data.attendees">
+                    <td>{{att.name}}</td>
+                    <td>{{att.email}}</td>
+                    <td>{{att.contact}}</td>
+                    <td>{{att.status}}</td>
+                </tr>
+                <tr ng-if="data.attendees.length === 0">
+                    <td colspan="4" class="text-center">No attendees found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Vendors Tab -->
+    <div id="vendors" class="tab-pane fade">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Vendor Name</th>
+                    <th>Contact Person</th>
+                    <th>Contact Number</th>
+                    <th>Services</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="vendor in data.vendors">
+                    <td>{{vendor.name}}</td>
+                    <td>{{vendor.contact_person}}</td>
+                    <td>{{vendor.contact_number}}</td>
+                    <td>{{vendor.services}}</td>
+                </tr>
+                <tr ng-if="data.vendors.length === 0">
+                    <td colspan="4" class="text-center">No vendors found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Budget Tab -->
+    <div id="budget" class="tab-pane fade">
+        <p><strong>Total Budget:</strong> {{data.budget.total}}</p>
+        <p><strong>Amount Spent:</strong> {{data.budget.spent}}</p>
+        <p><strong>Remaining:</strong> {{data.budget.remaining}}</p>
+        <p><strong>Status:</strong> {{data.budget.status}}</p>
+    </div>
+
+    <!-- Schedule Tab -->
+    <div id="schedule" class="tab-pane fade">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Activity</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="sch in data.schedule">
+                    <td>{{sch.activity}}</td>
+                    <td>{{sch.start}}</td>
+                    <td>{{sch.end}}</td>
+                    <td>{{sch.location}}</td>
+                </tr>
+                <tr ng-if="data.schedule.length === 0">
+                    <td colspan="4" class="text-center">No schedule found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Feedback Tab -->
+    <div id="feedback" class="tab-pane fade">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Attendee</th>
+                    <th>Rating</th>
+                    <th>Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="fb in data.feedback">
+                    <td>{{fb.attendee}}</td>
+                    <td>{{fb.rating}}</td>
+                    <td>{{fb.comments}}</td>
+                </tr>
+                <tr ng-if="data.feedback.length === 0">
+                    <td colspan="3" class="text-center">No feedback found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Notes Tab -->
+    <div id="notes" class="tab-pane fade">
+        <textarea class="form-control" placeholder="Enter work notes..." rows="4"></textarea>
+    </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

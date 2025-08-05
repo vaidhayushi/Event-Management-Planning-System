@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope) { 
+    $scope.goToRegisterAttendee = function() { 
+        var recordProducerSysId = '65a1d427c3036210319033fc05013108'; 
+        var url = '/sp?id=record_producer&sys_id=' + recordProducerSysId; 
+        window.location.href = url; 
+    }; 
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.custom-action-card-attendee {
+    background: linear-gradient(135deg, #e8f5e9, #f1fcf4);
+    border-radius: 20px;
+    padding: 30px 20px;
+    box-shadow: 0 8px 20px rgba(56, 142, 60, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.custom-action-card-attendee:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(56, 142, 60, 0.2);
+}
+
+.icon-wrapper-attendee {
+    background: #388e3c;
+    color: white;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    box-shadow: 0 4px 10px rgba(56, 142, 60, 0.4);
+}
+
+.custom-action-card-attendee h4 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.action-btn-attendee {
+    background: #43a047;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+.action-btn-attendee:hover {
+    background: #2e7d32;
+    color: #fff;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>register_attendee</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Register An Attendee</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 08:55:17</sys_created_on>
+        <sys_id>cb44eee7c3cb6210319033fc0501319a</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Register An Attendee</sys_name>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sp_widget_cb44eee7c3cb6210319033fc0501319a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 10:42:43</sys_updated_on>
+        <template><![CDATA[<div class="custom-action-card-attendee text-center">
+    <div class="icon-wrapper-attendee">
+        <i class="fa fa-user-plus"></i>
+    </div>
+    <h4>Register Attendee</h4>
+    <button class="action-btn-attendee" ng-click="goToRegisterAttendee()">
+        <i class="fa fa-plus"></i> Register
+    </button>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>
