@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_1790227_event_ma_event</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_1790227_event_ma_event">u_status=scheduled^EQ<item display_value="Scheduled" endquery="false" field="u_status" goto="false" newquery="false" operator="=" or="false" value="scheduled"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>RestApi</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous) {
+
+    try {
+        gs.info("Business Rule Triggered for Event: " + current.number);
+
+        var rm = new sn_ws.RESTMessageV2('Notify External Event System', 'Send Event Notification');
+
+        rm.setStringParameterNoEscape('u_event_name', current.u_event_name ? current.u_event_name.toString() : '');
+        rm.setStringParameterNoEscape('u_event_date', current.u_event_date ? current.u_event_date.toString() : '');
+        rm.setStringParameterNoEscape('u_location', current.u_location ? current.u_location.toString() : '');
+        rm.setStringParameterNoEscape('u_status', current.u_status ? current.u_status.toString() : '');
+        rm.setStringParameterNoEscape('u_contact_person', current.u_contact_person ? current.u_contact_person.toString() : '');
+
+        var response = rm.execute();
+        var status = response.getStatusCode();
+        var body = response.getBody();
+
+        gs.info("Event Notification Sent. Status: " + status + ". Response: " + body);
+    } catch (ex) {
+        gs.error("Error sending event notification: " + ex.message);
+    }
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-05 21:31:27</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>1b4099b7c30ba210319033fc050131f4</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>RestApi</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
+        <sys_update_name>sys_script_1b4099b7c30ba210319033fc050131f4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-05 22:33:17</sys_updated_on>
+        <template/>
+        <when>async_always</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=1b4099b7c30ba210319033fc050131f4"/>
+</record_update>

@@ -89,10 +89,10 @@
     attendeeGR.query();
     while (attendeeGR.next()) {
         data.attendees.push({
-            name: attendeeGR.getValue('u_attendee_name'),
+            name: attendeeGR.getValue('u_first_name'),
             email: attendeeGR.getValue('u_email'),
             contact: attendeeGR.getValue('u_contact_number'),
-            status: attendeeGR.getDisplayValue('u_status')
+            eventID: attendeeGR.getDisplayValue('u_event_id')
         });
     }
 
@@ -109,7 +109,7 @@
         });
     }
 
-    data.budget = {};
+    data.budget = [];
     var budgetGR = new GlideRecord('x_1790227_event_ma_budget');
     budgetGR.addQuery('u_event_id', sysId);
     if (budgetGR.next()) {
@@ -152,14 +152,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-08-05 10:47:38</sys_created_on>
         <sys_id>377cf6e7c34f6210319033fc0501317e</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>Event Details</sys_name>
         <sys_package display_value="Event Management &amp;amp; Planning System" source="x_1790227_event_ma">13348913c3032210319033fc050131c4</sys_package>
         <sys_policy/>
         <sys_scope display_value="Event Management &amp;amp; Planning System">13348913c3032210319033fc050131c4</sys_scope>
         <sys_update_name>sp_widget_377cf6e7c34f6210319033fc0501317e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-08-05 15:17:25</sys_updated_on>
+        <sys_updated_on>2025-08-06 05:56:35</sys_updated_on>
         <template><![CDATA[<div class="hc-widget panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title"><i class="fa fa-calendar"></i> {{ data.event.name }}</h4>
@@ -180,7 +180,6 @@
     <li><a data-toggle="tab" href="#budget">Budget</a></li>
     <li><a data-toggle="tab" href="#schedule">Schedule</a></li>
     <li><a data-toggle="tab" href="#feedback">Feedback</a></li>
-    <li><a data-toggle="tab" href="#notes">Notes</a></li>
 </ul>
 
 <div class="tab-content mt-3">
@@ -201,7 +200,7 @@
                     <td>{{task.name}}</td>
                     <td>{{task.assigned_to}}</td>
                     <td>{{task.due_date}}</td>
-                    <td>{{task.status}}</td>
+                    <td>{{task.eventID}}</td>
                 </tr>
                 <tr ng-if="data.tasks.length === 0">
                     <td colspan="4" class="text-center">No tasks found.</td>
@@ -218,7 +217,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Contact</th>
-                    <th>Status</th>
+                    <th>Event ID</th>
                 </tr>
             </thead>
             <tbody>
@@ -260,12 +259,28 @@
         </table>
     </div>
 
-    <!-- Budget Tab -->
     <div id="budget" class="tab-pane fade">
-        <p><strong>Total Budget:</strong> {{data.budget.total}}</p>
-        <p><strong>Amount Spent:</strong> {{data.budget.spent}}</p>
-        <p><strong>Remaining:</strong> {{data.budget.remaining}}</p>
-        <p><strong>Status:</strong> {{data.budget.status}}</p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Total Amount</th>
+                    <th>Amount Spent</th>
+                    <th>Amount Remaining</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="budget in data.budget">
+                    <td>{{budget.total}}</td>
+                    <td>{{budget.spent}}</td>
+                    <td>{{budget.remaining}}</td>
+                    <td>{{budget.status}}</td>
+                </tr>
+                <tr ng-if="data.budget.length === 0">
+                    <td colspan="4" class="text-center">No Budget found.</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- Schedule Tab -->
@@ -315,12 +330,6 @@
             </tbody>
         </table>
     </div>
-
-    <!-- Notes Tab -->
-    <div id="notes" class="tab-pane fade">
-        <textarea class="form-control" placeholder="Enter work notes..." rows="4"></textarea>
-    </div>
-</div>
 ]]></template>
     </sp_widget>
 </record_update>
